@@ -2,12 +2,13 @@ CREATE DATABASE enterprise;
 use enterprise;
 
 CREATE TABLE customer (
-  id VARCHAR(20),
-  name VARCHAR(40)
+  id VARCHAR(75),
+  created timestamp
 );
 
-INSERT INTO customer
-  (id, name)
-VALUES
-  ('1', 'balaji'),
-('2', 'apoorva');
+CREATE TABLE app_order (
+  id VARCHAR(75),
+  order_number varchar(75),
+  user_id varchar(75),
+  created timestamp
+);

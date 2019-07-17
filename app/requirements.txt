@@ -1,2 +1,5 @@
 Flask
 mysql-connector
+pandas
+pymysql
+sqlalchemy
