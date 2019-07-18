@@ -1,2 +1,3 @@
 .idea
 venv
+app/service/__pycache__/

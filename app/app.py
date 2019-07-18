@@ -1,7 +1,6 @@
 from flask import Flask, request
 from service import util
 import json
-
 app = Flask(__name__)
 
 
@@ -72,6 +71,7 @@ def load_orders():
 @app.route('/cohort/report', methods=["POST"])
 def get_report():
     week_range = request.form.get('last_no_weeks')
+    util.get_cohort_report()
     return 'Week Range chosen is: ' + week_range
 
 
