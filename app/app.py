@@ -1,7 +1,18 @@
 from flask import Flask, request
 from service import util
+from sqlalchemy import create_engine
+import os
 import json
+
 app = Flask(__name__)
+
+user = os.getenv('DB_USER','root')
+password = os.getenv('DB_PASSWORD','root')
+host = os.getenv('DB_HOST','localhost')
+port = int(os.getenv('DB_PORT',32000))
+database = os.getenv('DB_DATABASE','enterprise')
+database_connection = create_engine('mysql+pymysql://{0}:{1}@{2}/{3}'.format(user, password, host, database),
+                          connect_args=dict(host=host, port=port))
 
 
 @app.route('/')
@@ -48,7 +59,7 @@ def get_report_form():
             <body>
                 <h1>Cohort customer order behaviour analysis!</h1>
                 <form action="/cohort/report" method="post">
-                    Generate complete report: <input type="submit" />
+                    <input type="submit" value="Click to Generate Report"/>
                 </form>
             </body>
         </html>
@@ -58,19 +69,19 @@ def get_report_form():
 @app.route('/load/customers', methods=["POST"])
 def load_customers():
     input_file = request.files['data_file']
-    return util.load_data('customer', input_file)
+    return util.load_data('customer', input_file.stream.read().decode("UTF8"), database_connection)
 
 
 @app.route('/load/orders', methods=["POST"])
 def load_orders():
     input_file = request.files['data_file']
-    return util.load_data('app_order', input_file)
+    return util.load_data('app_order', input_file, database_connection)
 
 
 @app.route('/cohort/report', methods=["POST"])
 def get_report():
     week_range = request.form.get('last_no_weeks')
-    return util.get_cohort_report()
+    return util.get_cohort_report(database_connection)
 
 
 if __name__ == '__main__':

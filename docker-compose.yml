@@ -6,6 +6,12 @@ services:
       - db
     ports:
       - "5000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_PORT=3306
+      - DB_DATABASE=enterprise
   db:
     image: mysql:5.7
     ports:

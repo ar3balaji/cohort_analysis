@@ -1,0 +1,26 @@
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>cohort_bucket</th>
+      <th>first_time_orderers_disp</th>
+      <th>unique_orderers_disp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>67</td>
+      <td>25.0% 1st time (1.0)</td>
+      <td>25.0% orderers (1)</td>
+    </tr>
+    <tr>
+      <td>68</td>
+      <td>25.0% 1st time (1.0)</td>
+      <td>50.0% orderers (2)</td>
+    </tr>
+    <tr>
+      <td>73</td>
+      <td>0.0% 1st time (0.0)</td>
+      <td>25.0% orderers (1)</td>
+    </tr>
+  </tbody>
+</table>
