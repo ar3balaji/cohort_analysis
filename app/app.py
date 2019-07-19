@@ -48,8 +48,7 @@ def get_report_form():
             <body>
                 <h1>Cohort customer order behaviour analysis!</h1>
                 <form action="/cohort/report" method="post">
-                    Enter week range: <input type="text" name="last_no_weeks" />
-                    <input type="submit" />
+                    Generate complete report: <input type="submit" />
                 </form>
             </body>
         </html>
@@ -71,8 +70,7 @@ def load_orders():
 @app.route('/cohort/report', methods=["POST"])
 def get_report():
     week_range = request.form.get('last_no_weeks')
-    util.get_cohort_report()
-    return 'Week Range chosen is: ' + week_range
+    return util.get_cohort_report()
 
 
 if __name__ == '__main__':
