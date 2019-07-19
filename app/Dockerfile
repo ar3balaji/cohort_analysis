@@ -16,4 +16,5 @@ RUN pip install -r requirements.txt
 
 # Run app.py when the container launches
 COPY app.py /app
+COPY service /app/service
 CMD python app.py
