@@ -49,5 +49,5 @@
 
 ## How to run tests
 <ol>
-    <li>From root folder run this command to start unit tests <code>python app/initiateTests.py</cod></li>
+    <li>From root folder run this command to start unit tests <code>python app/initiateTests.py</code></li>
 </ol>
