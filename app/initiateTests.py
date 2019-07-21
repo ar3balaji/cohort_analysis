@@ -55,9 +55,10 @@ def test_import_customers_file_nf():
 def test_clean():
     clean_db
 
-def check_reprot():
+
+def check_report():
     result = get_cohort_report(engine)
-    assert str(open('output.txt').read()) == str(result), 'Check report'
+    assert str(open('output.txt').read()) == result, 'Check report'
 
 
 if __name__ == "__main__":
@@ -68,7 +69,7 @@ if __name__ == "__main__":
     test_import_orders()
     assert get_count('customer') == 3, 'Customer count'
     assert get_count('app_order') == 5, 'Customer count'
-    check_reprot()
+    check_report()
     clean_db('customer')
     clean_db('app_order')
     print("Everything passed!")
