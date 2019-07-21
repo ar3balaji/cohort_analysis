@@ -43,11 +43,11 @@
         Import orders data using http://0.0.0.0:5000/import/orders</code>
     </li/>
     <li>
-        After data is loaded. use this link to generate report http://0.0.0.0:5000/cohort/analysis
+        After data is loaded. use this link to generate report http://0.0.0.0:5000/cohort/analysis by choosing required time zone
     </li>
 </ol>
 
 ## How to run tests
 <ol>
-    <li>From root folder run this command to start unit tests <code>python app/initiateTests.py</code></li>
+    <li>From root folder, change working directory to app and run this command to start unit tests <code>python initiateTests.py</code></li>
 </ol>

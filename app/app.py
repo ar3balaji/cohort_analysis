@@ -59,6 +59,12 @@ def get_report_form():
             <body>
                 <h1>Cohort customer order behaviour analysis!</h1>
                 <form action="/cohort/report" method="post">
+                     <fieldset id="timezone">
+                        <input type="radio" value="pt" name="timezone" checked>Pacific time zone</input></br>
+                        <input type="radio" value="mt" name="timezone">Mountain time zone</input></br>
+                        <input type="radio" value="ct" name="timezone">Central time zone</input></br>
+                        <input type="radio" value="et" name="timezone">Eastern time zone</input>
+                      </fieldset>
                     <input type="submit" value="Click to Generate Report"/>
                 </form>
             </body>
@@ -75,13 +81,12 @@ def load_customers():
 @app.route('/load/orders', methods=["POST"])
 def load_orders():
     input_file = request.files['data_file']
-    return util.load_data('app_order', input_file, database_connection)
+    return util.load_data('app_order', input_file.stream.read().decode("UTF8"), database_connection)
 
 
 @app.route('/cohort/report', methods=["POST"])
 def get_report():
-    week_range = request.form.get('last_no_weeks')
-    return util.get_cohort_report(database_connection)
+    return util.get_cohort_report(database_connection, request.form.get('timezone'))
 
 
 if __name__ == '__main__':

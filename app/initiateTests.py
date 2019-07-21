@@ -1,6 +1,6 @@
 import os
 from sqlalchemy import create_engine
-from service.util import load_from_file, get_cohort_report
+from service.util import load_from_file, get_cohort_report, get_customers_query, get_orders_query
 import mysql.connector
 
 user = os.getenv('DB_USER','root')
@@ -52,12 +52,28 @@ def test_import_customers_file_nf():
     assert load_from_file('customer', 'customers1.csv', engine) == 'File not found!', 'File not found'
 
 
+def test_get_customers_pt():
+    assert get_customers_query('pt') == 'select id as user_id, date_add(created, interval - 7 hour) as signup_date from customer order by created', 'Received correct query'
+
+
+def test_get_customers_mt():
+    assert get_customers_query('mt') == 'select id as user_id, date_add(created, interval - 6 hour) as signup_date from customer order by created', 'Received correct query'
+
+
+def test_get_orders_pt():
+    assert get_orders_query('pt') == 'select id as order_id, order_number, user_id, date_add(created, interval - 7 hour) as order_date from app_order', 'Received correct query'
+
+
+def test_get_orders_mt():
+    assert get_orders_query('mt') == 'select id as order_id, order_number, user_id, date_add(created, interval - 6 hour) as order_date from app_order', 'Received correct query'
+
+
 def test_clean():
     clean_db
 
 
 def check_report():
-    result = get_cohort_report(engine)
+    result = get_cohort_report(engine, 'pt')
     assert str(open('output.txt').read()) == result, 'Check report'
 
 
@@ -72,4 +88,8 @@ if __name__ == "__main__":
     check_report()
     clean_db('customer')
     clean_db('app_order')
+    test_get_customers_pt()
+    test_get_customers_mt()
+    test_get_orders_pt()
+    test_get_orders_mt()
     print("Everything passed!")
