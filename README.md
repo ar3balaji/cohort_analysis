@@ -30,8 +30,8 @@
     </li>
     <li>Application will be accessible at http://0.0.0.0:5000/</li>
     <li>
-        Note application will be using port 5000 and mysql database will be accessible using
-        port 32000 through mysql workbench, application uses port 3306. Additional properties are configurable in 
+        Note application will be using port 5000, mysql database will be accessible using
+        port 32000. Application uses port 3306 to communicate with database. Additional properties are configurable in 
         docker-compose file, which is located in root directory
     </li>
 </ol>
